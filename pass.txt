@@ -1,0 +1,3 @@
+apt
+apt-adm
+Passw0rd!
