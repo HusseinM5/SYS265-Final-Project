@@ -1,0 +1,100 @@
+@startuml
+
+title APT.LOCAL
+
+class WAN {
+  +IP: 10.0.17.10
+}
+
+class FW {
+  +IP: 172.16.1.10
+  +OS: pfsense
+}
+
+class Network {
+  +LAN: 172.16.1.10-29/24
+}
+
+class MGMT1 {
+  +IP: 172.16.1.13
+  +OS: Microsoft Windows Server 2019 (64-bit)
+  +Service: Distributed Files System
+}
+
+class MGMT2 {
+  +IP: 172.16.1.14
+  +OS: Ubuntu
+  +Service: Ansible
+}
+
+class DC1{
+  +IP: 172.16.1.11
+  +OS: Windows Server Core
+  +Service: Active Directory, DNS, Distributed File System
+  +DFS1
+}
+
+class DC2{
+  +IP: 172.16.1.12
+  +OS: Windows Server Core
+  +Service: Active Directory, DNS, Distributed File System
+  +DFS2
+}
+
+class WKS1 {
+  +IP: DHCP
+  +OS: Microsoft Windows 10
+}
+
+class WKS2 {
+  +IP: DHCP
+  +OS: Centos 7
+}
+
+class DHCP1 {
+  +IP: 172.16.1.15
+  +OS: Ubuntu
+  +Service: DHCP
+}
+
+class DHCP2 {
+  +IP: 172.16.1.16
+  +OS: Ubuntu
+  +Service: DHCP
+}
+
+class UTIL {
+  +IP: DHCP
+  +OS: Centos 7
+}
+
+class Domain {
+  +apt.local
+}
+
+class Docker {
+  +IP: 172.16.1.17
+  +OS: Ubuntu
+  +Service: Docker
+}
+
+
+FW <|-up- WAN
+Domain <|-up- DC1
+Domain <|-up- DC2
+Network <|-up- FW
+DC1 <|-up- Network
+DC2 <|-up- Network
+Domain <|-down- MGMT1
+Domain <|-down- MGMT2
+MGMT1 <|-up- Domain
+MGMT2 <|-up- Domain
+UTIL <|-up- Domain
+DHCP1 <|-up- Domain
+DHCP2 <|-up- Domain
+WKS1 <|-up- DHCP1
+WKS1 <|-up- DHCP2
+WKS2 <|-up- DHCP1
+WKS2 <|-up- DHCP2
+Docker <|-up- Domain
+@enduml
