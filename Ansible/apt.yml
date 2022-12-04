@@ -1,0 +1,7 @@
+- name: Install APT package
+  hosts: Ubuntu
+  become: true
+  tasks:
+  - apt:
+     name: net-tools
+     state: latest
