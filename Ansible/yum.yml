@@ -1,0 +1,7 @@
+- name: Install net-tools using yum
+  hosts: CentOS
+  become: true
+  tasks:
+  - yum:
+     name: net-tools
+     state: latest
