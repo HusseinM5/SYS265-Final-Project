@@ -78,6 +78,11 @@ class Docker {
   +Service: Docker
 }
 
+class WKS3 {
+  +IP: DHCP
+  +OS: Microsoft Windows 10
+}
+
 
 FW <|-up- WAN
 Domain <|-up- DC1
@@ -96,5 +101,7 @@ WKS1 <|-up- DHCP1
 WKS1 <|-up- DHCP2
 WKS2 <|-up- DHCP1
 WKS2 <|-up- DHCP2
+WKS3 <|-up- DHCP1
+WKS3 <|-up- DHCP2
 Docker <|-up- Domain
 @enduml
